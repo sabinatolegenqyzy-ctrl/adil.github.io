@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Әділ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #700000, #eb3349);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Общие стили для карточек */
+        .card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            max-width: 400px;
+            width: 85%;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            z-index: 10;
+            transition: all 0.8s ease;
+            position: absolute;
+        }
+
+        /* Вторая карточка изначально скрыта */
+        #wish-card {
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            pointer-events: none;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid #ffd700;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #f8d7da;
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 12px 35px;
+            background: #ffd700;
+            color: #800000;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        /* Сердечки */
+        .heart {
+            position: absolute;
+            background-color: rgba(255, 100, 100, 0.6);
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            transform: rotate(45deg);
+            animation: move 10s infinite linear;
+            bottom: -50px;
+        }
+        .heart::before, .heart::after {
+            content: "";
+            background-color: inherit;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+        }
+        .heart::before { top: -8px; left: 0; }
+        .heart::after { left: -8px; top: 0; }
+
+        @keyframes move {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="main-card">
+        <div class="profile-pic">
+            <img src="sabi.jpg" alt="Photo">
+        </div>
+        <h1>Туған күніңмен жаным!</h1>
+        <p>Жаңа жасың құтты болсын жарқыным!</p> 
+        <button class="btn" onclick="nextPage()">Бас</button>
+    </div>
+ <div class="card" id="wish-card">
+        <h1>Саған тілегім...</h1>
+        <p>Мені сүйетініңді ұқтырғың келген əрбір əрекетіңді құрметтейтінімді біліп жүр!Түн ұйқымды төрт бөліп, сенің нұрлы жүзің көз алдыма елестейді. Тағдырдың бізге əзірлеген тəттісі мен ащысын, қуанышы мен қайғысын қарсы алуға дайынмын.Сенің осы махаббатың мені бір-ақ сəтте шексіз бақытты əрі мүлде бақытсыз ететін құдіретке ие. Жаным сені келіп жеткен жаңа жасыңмен құттықтаймын. Саған не сыйларымды көп таңдадым, бірақта саған ұнамай қалар деп те қорқамын. Сонда да мен қаншалықты өз махаббатымды саған не іспен не сөзбен көрсетсем де, ол менің шын мәніндегі сезімдер өлшемін толтыра алмайтынын біліп жүргеніңді қалаймын. Егер сенің қасыңда болып бір ғана серуен құрсам да ол менің шексіз арманым мен тең болар жағдайға жетті. Күнделікті менде бар суреттер мен дауыстарыңды естіп қандай күй кешетінімді бір Құдай білетін шығар. </p>
+
+        <p style="color: #ffd700; font-weight: bold;">Сүйіктің, Сабинадан❤️</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 5 + "s";
+            heart.style.opacity = Math.
+ random();
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+        setInterval(createHeart, 400);
+
+        function nextPage() {
+            const mainCard = document.getElementById('main-card');
+            const wishCard = document.getElementById('wish-card');
+
+            // Убираем первую карточку
+            mainCard.style.opacity = '0';
+            mainCard.style.transform = 'scale(0.5) rotate(-10deg)';
+            mainCard.style.pointerEvents = 'none';
+
+            // Показываем вторую через небольшую паузу
+            setTimeout(() => {
+                wishCard.style.opacity = '1';
+                wishCard.style.transform = 'scale(1) translateY(0)';
+                wishCard.style.pointerEvents = 'all';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
