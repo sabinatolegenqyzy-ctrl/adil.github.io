@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
+            padding: 20 px 0;
             font-family: 'Georgia', serif;
             background: linear-gradient(135deg, #700000, #eb3349);
             color: #fff;
@@ -15,7 +15,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
             position: relative;
         }
 
@@ -23,7 +22,7 @@
         .card {
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 30px;
             border-radius: 30px;
             backdrop-filter: blur(10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
@@ -32,12 +31,13 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
             z-index: 10;
             transition: all 0.8s ease;
-            position: absolute;
+            position: relative;
+            nargim: auto;
         }
 
         /* Вторая карточка изначально скрыта */
         #wish-card {
-            opacity: 0;
+            display: none;
             transform: scale(0.8) translateY(50px);
             pointer-events: none;
         }
@@ -148,17 +148,16 @@
             const mainCard = document.getElementById('main-card');
             const wishCard = document.getElementById('wish-card');
 
-            // Убираем первую карточку
-            mainCard.style.opacity = '0';
-            mainCard.style.transform = 'scale(0.5) rotate(-10deg)';
-            mainCard.style.pointerEvents = 'none';
-
-            // Показываем вторую через небольшую паузу
+            mainCard.style.display = 'none'; // Полностью убираем первую
+            
+            wishCard.style.display = 'block'; // Включаем вторую
             setTimeout(() => {
                 wishCard.style.opacity = '1';
-                wishCard.style.transform = 'scale(1) translateY(0)';
-                wishCard.style.pointerEvents = 'all';
-            }, 500);
+                wishCard.style.transform = 'scale(1)';
+            }, 10);
+            
+            // Прокрутка в начало страницы при открытии (на случай если нажали внизу)
+            window.scrollTo(0, 0);
         }
     </script>
 </body>
